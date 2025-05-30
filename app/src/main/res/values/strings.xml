@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Encrypt</string>
+    <string name="encrypt_file">SELECT A FILE</string>
+    <string name="decrypt_file">DECRYPT A FILE</string>
+    <string name="selected_file">You have selected the file:</string>
+    <string name="pin_code">Create a PIN code</string>
+    <string name="pin_code1">Insert PIN code</string>
+    <string name="encrypt">ENCRYPT</string>
+    <string name="decrypt">DECRYPT</string>
+    <string name="settings">Settings</string>
+    <string name="characters">PIN should be at least 4 characters</string>
+    <string name="pin_incorrect">PIN code is incorrect</string>
+    <string name="unable">This file cannot be encrypted\nTry moving it to Downloads folder and try again</string>
+    <string name="not_found">Encrypted file could not be found</string>
+    <string name="delete_file">Delete file</string>
+    <string name="delete_all">Delete database</string>
+
+
+    <string name="toast_1">Select file you want to encrypt</string>
+    <string name="toast_2">File encrypted successfully</string>
+    <string name="no_file">No encrypted files</string>
+    <string name="toast_5">There already exists a file with that name</string>
+    <!-- Password field hints -->
+    <string name="new_password_hint">New Password</string>
+    <string name="confirm_password_hint">Confirm Password</string>
+
+    <!-- Button and description texts -->
+    <string name="register_button">Register</string>
+    <string name="toggle_password_desc">Toggle password visibility</string>
+</resources>
+

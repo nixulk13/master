@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Encrypt</string>
+    <string name="encrypt_file">DATEI AUSSUCHEN</string>
+    <string name="decrypt_file">ENTSCHLÜSSEL EINE DATEI</string>
+    <string name="encrypt">ENTSCHLÜSSELN</string>
+    <string name="decrypt">VERSCHLÜSSELN</string>
+    <string name="settings">Einstellungen</string>
+    <string name="pin_code">Erstellen Sie einen PIN-Code</string>
+    <string name="pin_code1">PIN-Code einfügen</string>
+    <string name="selected_file">Sie haben die Datei ausgewählt:</string>
+    <string name="characters">Der PIN sollte aus mindestens 4 Zeichen bestehen</string>
+    <string name="pin_incorrect">PIN code nicht korrekt</string>
+    <string name="unable">Diese Datei kann nicht verschlüsselt werden\nVersuchen Sie es in den Ordner Downloads zu verschieben und versuchen Sie es erneut. </string>
+    <string name="not_found">Verchlüsselte Datei kann nicht gefunden werden</string>
+    <string name="delete_file">Lösche Datei</string>
+    <string name="delete_all">Lösche Datenbank</string>
+
+    <string name="toast_1">Wählen Sie die zu verschlüsselnde Datei aus</string>
+    <string name="toast_2">Datei erfolgreich verschlüsselt</string>
+    <string name="no_file">Keine verschlüsselten Dateien</string>
+    <string name="toast_5">Es existiert bereits eine Date mit diesem Namen</string>
+</resources>
