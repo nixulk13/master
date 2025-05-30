@@ -9,6 +9,7 @@ import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import java.security.MessageDigest
 
 class InscriptionActivity : AppCompatActivity() {
 
@@ -22,15 +23,15 @@ class InscriptionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_inscription) // Link to the XML layout
+        setContentView(R.layout.activity_inscription)
 
         // SharedPreferences to check if it's the first time the user is opening the app
         val prefs: SharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
         val isFirstTime = prefs.getBoolean("isFirstTime", true)
 
         if (!isFirstTime) {
-            // If it's not the first time, skip InscriptionActivity and go to the main activity
-            val intent = Intent(this@InscriptionActivity, MainActivity::class.java)
+            // If it's not the first time, go to login activity
+            val intent = Intent(this@InscriptionActivity, LoginActivity::class.java)
             startActivity(intent)
             finish()
             return
@@ -55,38 +56,46 @@ class InscriptionActivity : AppCompatActivity() {
 
             // Check if the password is at least 8 characters
             if (newPassword.length < 8) {
-                // Show a Toast message or error if password length is less than 8
                 Toast.makeText(this, "Password must be at least 8 characters long.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             // Check if the passwords match
             if (newPassword != confirmPassword) {
-                // Show a Toast message or error if passwords do not match
                 Toast.makeText(this, "Passwords do not match.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // After registration, set the first-time flag to false
+            // Hash and store the password
+            val passwordHash = hashPassword(newPassword)
             val editor = prefs.edit()
+            editor.putString("password_hash", passwordHash)
             editor.putBoolean("isFirstTime", false)
             editor.apply()
 
-            // Optionally, move to the main activity after successful registration
-            val intent = Intent(this@InscriptionActivity, MainActivity::class.java)
+            Toast.makeText(this, "Registration successful!", Toast.LENGTH_SHORT).show()
+
+            // Move to login activity after successful registration
+            val intent = Intent(this@InscriptionActivity, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }
+    }
+
+    private fun hashPassword(password: String): String {
+        val digest = MessageDigest.getInstance("SHA-256")
+        val hashBytes = digest.digest(password.toByteArray())
+        return hashBytes.joinToString("") { "%02x".format(it) }
     }
 
     private fun togglePasswordVisibility(editText: EditText, imageButton: ImageButton) {
         imageButton.setOnClickListener {
             if (editText.inputType == android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD) {
                 editText.inputType = android.text.InputType.TYPE_CLASS_TEXT
-                imageButton.setImageResource(R.drawable.ic_visibility) // Change icon to visible
+                imageButton.setImageResource(R.drawable.ic_visibility)
             } else {
                 editText.inputType = android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
-                imageButton.setImageResource(R.drawable.ic_visibility_off) // Change icon to invisible
+                imageButton.setImageResource(R.drawable.ic_visibility_off)
             }
             editText.setSelection(editText.text.length)
         }

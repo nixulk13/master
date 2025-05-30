@@ -15,7 +15,12 @@
         <activity android:name=".InscriptionActivity">
             <!-- Optionally, add an intent filter to handle it only when needed -->
         </activity>
-
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
 
         <activity android:name=".MainActivity">
             <intent-filter>

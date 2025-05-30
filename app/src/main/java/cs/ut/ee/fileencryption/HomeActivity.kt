@@ -1,7 +1,6 @@
 package cs.ut.ee.fileencryption
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -16,29 +15,17 @@ import android.net.Uri
 import android.provider.MediaStore
 import android.view.View
 
-class MainActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.my_toolbar))
 
-        // Always require login - redirect to LoginActivity
-        val prefs: SharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
-        val isFirstTime = prefs.getBoolean("isFirstTime", true)
-
-        if (isFirstTime) {
-            // First time user, go to registration first
-            val intent = Intent(this@MainActivity, InscriptionActivity::class.java)
-            startActivity(intent)
-            finish()
-            return
-        } else {
-            // User is registered, always require login
-            val intent = Intent(this@MainActivity, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
-            return
+        // Check for storage permissions
+        if(ContextCompat.checkSelfPermission(this , permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
+            val requestedPermissions: Array<String> = arrayOf(permission.READ_EXTERNAL_STORAGE)
+            ActivityCompat.requestPermissions(this, requestedPermissions, 1)
         }
     }
 
@@ -51,7 +38,6 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.action_settings -> startActivity(Intent(this, SettingsActivity()::class.java))
             R.id.action_logout -> {
-                // Add logout functionality
                 logout()
                 return true
             }
@@ -60,9 +46,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun logout() {
-        // Clear any session data if needed
-        // Navigate back to login
-        val intent = Intent(this@MainActivity, LoginActivity::class.java)
+        // Navigate back to MainActivity which will show login
+        val intent = Intent(this@HomeActivity, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
