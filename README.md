@@ -48,3 +48,4 @@ are not responsible for any loss or leakage of data, sensitive or otherwise.
 
 ### [Link to releases](https://github.com/AgiBla/Encrypt/releases)
 # master
+# encrypt
